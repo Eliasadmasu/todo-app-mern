@@ -11,11 +11,23 @@ const AddTodo = () => {
 
   const sendData = async (e) => {
     e.preventDefault();
-    const response = await axios.post(
-      "http://localhost:8800/api/addtodo",
-      TodoList
-    );
-    console.log(response);
+    try {
+      const response = await axios.post(
+        "http://localhost:8800/api/addtodo",
+        TodoList
+      );
+      console.log(response);
+      if (response.status === 200) {
+        alert("workout screated");
+        setTodoList({
+          title: "",
+          loads: "",
+          reps: "",
+        });
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const handleChange = (e) => {
@@ -28,8 +40,8 @@ const AddTodo = () => {
 
   return (
     <div style={{ flex: "3" }}>
-      Add New Workout
-      <form onSubmit={sendData}>
+      <h3> Add New Workout</h3>
+      <form onSubmit={sendData} className="form">
         <div className="column">
           <label htmlFor="">Exercise Title</label>
           <input
@@ -48,7 +60,9 @@ const AddTodo = () => {
           <label htmlFor="">Reps:</label>
           <input type="number" name="reps" onChange={handleChange} required />
         </div>
-        <button type="submit">Add Workout</button>
+        <button className="button" type="submit">
+          Add Workout
+        </button>
       </form>
     </div>
   );
