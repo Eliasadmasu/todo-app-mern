@@ -1,0 +1,11 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.btn {
+  width: 60px;
+  padding: 3px;
+  border-radius: 15px;
+  background-color: tomato;
+}

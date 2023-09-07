@@ -1,0 +1,47 @@
+.mainTodo {
+  flex: 7;
+  padding: 10px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 40px;
+  align-items: center;
+}
+.cont {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+.Conta {
+  border: 1px solid cadetblue;
+  padding: 10px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.listCont {
+  width: 400px;
+  border: 1px solid cadetblue;
+  line-height: 25px;
+  padding: 10px;
+  border-radius: 20px;
+  width: 100%;
+}
+.listCont h4 {
+  font-size: 18px;
+  color: seagreen;
+}
+.listCont.one {
+  border: none;
+}
+.logobtn {
+  border: none;
+  background: none;
+}
+.logobtn svg:hover {
+  fill: rgb(219, 0, 0);
+  transform: scale(1.1);
+}
