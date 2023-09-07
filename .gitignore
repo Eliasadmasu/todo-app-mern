@@ -1,0 +1,14 @@
+# Node.js and npm
+node_modules/
+package-lock.json
+
+# Environment variables
+.env
+
+# Build and compiled files (add more if needed)
+/build
+/dist
+
+# Editor and IDE specific files
+.vscode/
+.idea/
