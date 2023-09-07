@@ -18,5 +18,21 @@ const TodoAdd = async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
+const getTodo = async (req, res) => {
+  try {
+    const todos = await TodoModel.find();
+    res.status(200).json(todos);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
 
-export { TodoAdd };
+const deleteTodo = async (req, res) => {
+  try {
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export { TodoAdd, getTodo, deleteTodo };
