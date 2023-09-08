@@ -1,6 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import TodoModel from "../models/todoSchema.js";
+import UserModel from "../models/UserSchema.js";
 
 const TodoAdd = async (req, res) => {
   const { title, reps, loads } = req.body;

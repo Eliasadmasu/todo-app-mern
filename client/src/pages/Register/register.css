@@ -1,0 +1,32 @@
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+}
+
+.bton {
+  background-color: aquamarine;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  background-color: lightslategray;
+  border-radius: 50px;
+  padding: 40px;
+  gap: 40px;
+}
+.column {
+  gap: 40px;
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  font-size: 20px;
+}
+.column input {
+  width: 100%;
+}

@@ -5,12 +5,9 @@ import TodoList from "../../components/TodoList/TodoList";
 
 const Home = () => {
   return (
-    <div className="container">
-      <Navbar />
-      <div className="main">
-        <TodoList />
-        <AddTodo />
-      </div>
+    <div className="main">
+      <TodoList />
+      <AddTodo />
     </div>
   );
 };

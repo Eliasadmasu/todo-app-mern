@@ -16,15 +16,8 @@ const AddTodo = () => {
         "http://localhost:8800/api/addtodo",
         TodoList
       );
+      setTodoList({ title: "", loads: "", reps: "" });
       console.log(response);
-      if (response.status === 200) {
-        alert("workout screated");
-        setTodoList({
-          title: "",
-          loads: "",
-          reps: "",
-        });
-      }
     } catch (error) {
       console.error(error);
     }
