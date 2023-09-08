@@ -5,7 +5,7 @@ import {
   getTodo,
   todoUpdate,
 } from "../controllers/todoController.js";
-import { register } from "../controllers/authController.js";
+import { login, register } from "../controllers/authController.js";
 
 const router = Router();
 
@@ -18,4 +18,6 @@ router.route("/deletetodo/:id").delete(deleteTodo);
 router.route("/updatetodo/:id").put(todoUpdate);
 // authentication
 router.route("/register").post(register);
+
+router.route("/login").post(login);
 export default router;

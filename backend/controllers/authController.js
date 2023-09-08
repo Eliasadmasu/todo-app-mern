@@ -28,4 +28,30 @@ const register = async (req, res) => {
   }
 };
 
-export { register };
+const login = async (req, res) => {
+  const { username, password } = req.body;
+  try {
+    const UserFound = await UserModel.findOne({ username });
+
+    if (!UserFound) {
+      res.status(401).json({ message: "User Not Found" });
+    } else {
+      const passwordCompare = await bcrypt.compare(
+        password,
+        UserFound.password
+      );
+
+      if (passwordCompare) {
+        // Successful login
+        res.status(200).json({ message: "Login successful" });
+      } else {
+        // Failed login
+        res.status(401).json({ message: "Invalid credentials" });
+      }
+    }
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export { register, login };
