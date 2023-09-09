@@ -10,7 +10,9 @@ const TodoList = () => {
   useEffect(() => {
     const fetchTodo = async () => {
       try {
-        const response = await axios.get("http://localhost:8800/api/todos");
+        const response = await axios.get(
+          "https://todo-app-mern-dun.vercel.app/todos"
+        );
         setTodoList(response.data);
       } catch (err) {
         console.error(err);
@@ -22,7 +24,7 @@ const TodoList = () => {
   const handleDeleteTodo = async (todoId) => {
     try {
       const response = await axios.delete(
-        `http://localhost:8800/api/deletetodo/${todoId}`
+        `https://todo-app-mern-dun.vercel.app/deletetodo/${todoId}`
       );
       if (response.status === 200) {
         // Remove the deleted todo from the list
@@ -42,7 +44,7 @@ const TodoList = () => {
   const handleSaveEdit = async () => {
     try {
       const response = await axios.put(
-        `http://localhost:8800/api/updatetodo/${editTodo._id}`,
+        `https://todo-app-mern-dun.vercel.app/updatetodo/${editTodo._id}`,
         editTodo
       );
       if (response.status === 200) {
