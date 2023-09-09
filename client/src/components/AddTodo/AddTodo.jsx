@@ -1,23 +1,38 @@
 import { useState } from "react";
 import "./addtodo.css";
 import axios from "axios";
-
+import { useAuth } from "../context/UserContext";
+import { useNavigate } from "react-router-dom";
 const AddTodo = () => {
   const [TodoList, setTodoList] = useState({
     title: "",
     loads: "",
     reps: "",
   });
+  const navigate = useNavigate();
+  const [loginText, setLoginText] = useState("");
+  const { token } = useAuth();
 
   const sendData = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
-        "http://localhost:8800/api/addtodo",
-        TodoList
-      );
-      setTodoList({ title: "", loads: "", reps: "" });
-      console.log(response);
+      if (token) {
+        const response = await axios.post(
+          "http://localhost:8800/api/addtodo",
+          TodoList,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        setTodoList({ title: "", loads: "", reps: "" });
+        console.log(response);
+      } else {
+        setLoginText("You must be Logged In To Access this");
+        navigate("/login");
+      }
     } catch (error) {
       console.error(error);
     }
@@ -41,7 +56,7 @@ const AddTodo = () => {
             type="text"
             name="title"
             onChange={handleChange}
-            required
+            required={token}
             minLength={2}
           />
         </div>
@@ -51,11 +66,17 @@ const AddTodo = () => {
         </div>
         <div className="column">
           <label htmlFor="">Reps:</label>
-          <input type="number" name="reps" onChange={handleChange} required />
+          <input
+            type="number"
+            name="reps"
+            onChange={handleChange}
+            required={token}
+          />
         </div>
         <button className="button" type="submit">
           Add Workout
         </button>
+        {loginText}
       </form>
     </div>
   );

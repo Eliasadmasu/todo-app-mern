@@ -1,10 +1,13 @@
 import { useState } from "react";
 import "../Register/register.css";
 import axios from "axios";
+import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../components/context/UserContext";
 
 const Login = () => {
-  const [login, setLogin] = useState({
+  const { login } = useAuth();
+  const [logins, setLogin] = useState({
     username: "",
     password: "",
   });
@@ -14,10 +17,15 @@ const Login = () => {
   const dataTodSend = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:8800/api/login", login);
-      if (res.status === 201) {
+      const res = await axios.post("http://localhost:8800/api/login", logins);
+      if (res.status === 200) {
+        const tokenUser = res.data.token;
+        const username = res.data.username;
+        Cookies.set("auth_token", tokenUser, { expires: 7 });
+        Cookies.set("auth_username", username, { expires: 7 });
+        login(tokenUser, username);
         setError(res.data.message);
-        navigate("/login");
+        navigate("/");
       }
       console.log(res);
     } catch (err) {
@@ -29,7 +37,7 @@ const Login = () => {
   // handlechange
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setLogin({ ...login, [name]: value });
+    setLogin({ ...logins, [name]: value });
   };
 
   return (

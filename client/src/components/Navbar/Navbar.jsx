@@ -1,7 +1,14 @@
+import Cookies from "js-cookie";
+import { useAuth } from "../context/UserContext";
 import "./navbar.css";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
+  const onLogout = () => {
+    logout();
+    Cookies.remove("auth_token");
+  };
+  const { token, logout, username } = useAuth();
   return (
     <div className="nav">
       <Link className="logo" to={"/"}>
@@ -9,8 +16,18 @@ const Navbar = () => {
       </Link>
 
       <div className="gap">
-        <Link>Login</Link>
-        <Link to={"register"}>Register</Link>
+        {token && (
+          <div>
+            <div>{username}</div>
+            <button onClick={onLogout}>Logout</button>
+          </div>
+        )}
+        {!token && (
+          <div>
+            <Link to={"/login"}>Login</Link>
+            <Link to={"register"}>Register</Link>
+          </div>
+        )}
       </div>
     </div>
   );
