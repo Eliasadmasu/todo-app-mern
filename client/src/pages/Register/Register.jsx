@@ -15,7 +15,7 @@ const Register = () => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        "https://todo-app-mern-dun.vercel.app/register",
+        "https://todo-app-mern-dun.vercel.app/api/register/api/",
         register
       );
       if (res.status === 201) {

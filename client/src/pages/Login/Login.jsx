@@ -18,7 +18,7 @@ const Login = () => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        "https://todo-app-mern-dun.vercel.app/login",
+        "https://todo-app-mern-dun.vercel.app/login/api/",
         logins
       );
       if (res.status === 200) {
