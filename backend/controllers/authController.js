@@ -2,6 +2,8 @@ import express from "express";
 import UserModel from "../models/UserSchema.js";
 import bcrypt from "bcrypt";
 import mongoose from "mongoose";
+import jwt from "jsonwebtoken";
+import "dotenv/config.js";
 
 const register = async (req, res) => {
   const { username, password } = req.body;
@@ -43,7 +45,15 @@ const login = async (req, res) => {
 
       if (passwordCompare) {
         // Successful login
-        res.status(200).json({ message: "Login successful" });
+        const token = jwt.sign({ userId: UserFound._id }, process.env.SECRET, {
+          expiresIn: "3d",
+        });
+        res.cookie("token", token, {
+          httpOnly: true,
+          secure: process.env.NODE_ENV === "production",
+          maxAge: 3 * 24 * 60 * 60 * 1000, // 3 days in milliseconds
+        });
+        res.status(200).json({ message: "Login successful", token, username });
       } else {
         // Failed login
         res.status(401).json({ message: "Invalid credentials" });

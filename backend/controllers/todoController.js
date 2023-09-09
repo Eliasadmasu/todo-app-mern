@@ -2,10 +2,11 @@ import express from "express";
 import mongoose from "mongoose";
 import TodoModel from "../models/todoSchema.js";
 import UserModel from "../models/UserSchema.js";
+import jwt from "jsonwebtoken";
 
 const TodoAdd = async (req, res) => {
   const { title, reps, loads } = req.body;
-
+  const user = req.user;
   try {
     const newTodo = new TodoModel({
       title,
@@ -13,7 +14,7 @@ const TodoAdd = async (req, res) => {
       loads,
     });
     await newTodo.save();
-    res.status(201).json("New Todo Added");
+    res.status(201).json({ message: "New Todo Added", user });
   } catch (error) {
     console.error("Error creating todo:", error);
     res.status(500).json({ error: "Internal Server Error" });

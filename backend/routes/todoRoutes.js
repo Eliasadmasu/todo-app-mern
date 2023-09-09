@@ -4,12 +4,14 @@ import {
   deleteTodo,
   getTodo,
   todoUpdate,
+  // verifyToken,
 } from "../controllers/todoController.js";
 import { login, register } from "../controllers/authController.js";
+import { verifytoken } from "../middleware/verifytoken.js";
 
 const router = Router();
 
-router.route("/addtodo").post(TodoAdd);
+router.route("/addtodo").post(verifytoken, TodoAdd);
 
 router.route("/todos").get(getTodo);
 
