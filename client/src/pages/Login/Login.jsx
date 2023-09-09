@@ -17,7 +17,10 @@ const Login = () => {
   const dataTodSend = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:8800/api/login", logins);
+      const res = await axios.post(
+        "https://todo-app-mern-dun.vercel.app/login",
+        logins
+      );
       if (res.status === 200) {
         const tokenUser = res.data.token;
         const username = res.data.username;

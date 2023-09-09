@@ -18,7 +18,7 @@ const AddTodo = () => {
     try {
       if (token) {
         const response = await axios.post(
-          "http://localhost:8800/api/addtodo",
+          "https://todo-app-mern-dun.vercel.app/addtodo",
           TodoList,
           {
             headers: {
